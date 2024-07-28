@@ -5,6 +5,7 @@ import "./App.css";
 import Description from "./components/Description/Description.jsx";
 import Options from "./components/Options/Options.jsx";
 import Feedback from "./components/Feedback/Feedback.jsx";
+import Notification from "./components/Notification/Notification.jsx";
 
 function App() {
   const [feedback, setFeedback] = useState(
@@ -41,13 +42,17 @@ function App() {
     <>
       <Description />
       <Options totalFeedback={totalFeedback} updateFeedback={updateFeedback} />
-      <Feedback
-        good={feedback.good}
-        neutral={feedback.neutral}
-        bad={feedback.bad}
-        totalFeedback={totalFeedback}
-        positiveFeedback={positiveFeedback}
-      />
+      {totalFeedback > 0 ? (
+        <Feedback
+          good={feedback.good}
+          neutral={feedback.neutral}
+          bad={feedback.bad}
+          totalFeedback={totalFeedback}
+          positiveFeedback={positiveFeedback}
+        />
+      ) : (
+        <Notification />
+      )}
     </>
   );
 }
